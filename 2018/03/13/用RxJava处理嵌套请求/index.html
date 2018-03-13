@@ -94,16 +94,19 @@
 
 
 
-<meta name="description" content="什么技术都关注">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Take Off Life">
-<meta property="og:url" content="http://www.takeofflife.com/index.html">
+<meta name="description" content="互联网应用开发中由于请求网络数据频繁，往往后面一个请求的参数是前面一个请求的结果，于是经常需要在前面一个请求的响应中去发送第二个请求，从而造成“请求嵌套”的问题。如果层次比较多，代码可读性和效率都是问题。本文首先从感性上介绍下RxJava，然后讲解如何通过RxJava中的flatMap操作符来处理“嵌套请求”的问题  内容提要 RxJava简单介绍 嵌套请求举例 运用flatMap map和fl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用RxJava处理嵌套请求">
+<meta property="og:url" content="http://www.takeofflife.com/2018/03/13/用RxJava处理嵌套请求/index.html">
 <meta property="og:site_name" content="Take Off Life">
-<meta property="og:description" content="什么技术都关注">
+<meta property="og:description" content="互联网应用开发中由于请求网络数据频繁，往往后面一个请求的参数是前面一个请求的结果，于是经常需要在前面一个请求的响应中去发送第二个请求，从而造成“请求嵌套”的问题。如果层次比较多，代码可读性和效率都是问题。本文首先从感性上介绍下RxJava，然后讲解如何通过RxJava中的flatMap操作符来处理“嵌套请求”的问题  内容提要 RxJava简单介绍 嵌套请求举例 运用flatMap map和fl">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2208102-c5d32034c00c4c57.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:updated_time" content="2018-03-13T02:50:20.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Take Off Life">
-<meta name="twitter:description" content="什么技术都关注">
+<meta name="twitter:title" content="用RxJava处理嵌套请求">
+<meta name="twitter:description" content="互联网应用开发中由于请求网络数据频繁，往往后面一个请求的参数是前面一个请求的结果，于是经常需要在前面一个请求的响应中去发送第二个请求，从而造成“请求嵌套”的问题。如果层次比较多，代码可读性和效率都是问题。本文首先从感性上介绍下RxJava，然后讲解如何通过RxJava中的flatMap操作符来处理“嵌套请求”的问题  内容提要 RxJava简单介绍 嵌套请求举例 运用flatMap map和fl">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2208102-c5d32034c00c4c57.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
 
 
 
@@ -132,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://www.takeofflife.com/"/>
+  <link rel="canonical" href="http://www.takeofflife.com/2018/03/13/用RxJava处理嵌套请求/"/>
 
 
 
 
 
-  <title>Take Off Life</title>
+  <title>用RxJava处理嵌套请求 | Take Off Life</title>
   
 
 
@@ -163,9 +166,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -248,9 +249,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -280,9 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/13/用RxJava处理嵌套请求/" itemprop="url">用RxJava处理嵌套请求</a></h1>
+          <h1 class="post-title" itemprop="name headline">用RxJava处理嵌套请求</h1>
         
 
         <div class="post-meta">
@@ -373,9 +372,7 @@
       
 
       
-        
-          
-            <blockquote>
+        <blockquote>
 <p>互联网应用开发中由于请求网络数据频繁，往往后面一个请求的参数是前面一个请求的结果，于是经常需要在前面一个请求的响应中去发送第二个请求，从而造成“请求嵌套”的问题。如果层次比较多，代码可读性和效率都是问题。本文首先从感性上介绍下RxJava，然后讲解如何通过RxJava中的flatMap操作符来处理“嵌套请求”的问题</p>
 </blockquote>
 <h3 id="内容提要"><a href="#内容提要" class="headerlink" title="内容提要"></a>内容提要</h3><ul>
@@ -421,8 +418,6 @@
 </blockquote>
 <p>即它将返回值body为包裹上了一层<strong>“Observable”</strong></p>
 
-          
-        
       
     </div>
     
@@ -431,6 +426,14 @@
 
     
 
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
     
 
 
@@ -442,12 +445,12 @@
       
 
       
+      
+      
 
       
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -457,10 +460,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -468,6 +472,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/03/13/用RxJava处理嵌套请求/"
+           data-title="用RxJava处理嵌套请求" data-url="http://www.takeofflife.com/2018/03/13/用RxJava处理嵌套请求/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -488,8 +500,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -533,6 +554,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#内容提要"><span class="nav-number">1.</span> <span class="nav-text">内容提要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RxJava简单介绍"><span class="nav-number">2.</span> <span class="nav-text">RxJava简单介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套请求举例"><span class="nav-number">3.</span> <span class="nav-text">嵌套请求举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运用flatMap"><span class="nav-number">4.</span> <span class="nav-text">运用flatMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map和flatMap"><span class="nav-number">5.</span> <span class="nav-text">map和flatMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RxJava与Retrofit配合解决嵌套请求"><span class="nav-number">6.</span> <span class="nav-text">RxJava与Retrofit配合解决嵌套请求</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -656,10 +693,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
